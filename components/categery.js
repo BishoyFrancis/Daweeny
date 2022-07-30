@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image, ScrollView } from "react-native";
+import { FlatGrid } from 'react-native-super-grid';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Items from './Items';
@@ -7,19 +8,24 @@ import Items from './Items';
 export default class Categery extends Component {
     render() {
         return (
-            <ScrollView style={style.page}>
+            <View
+            
+            
+            
+            
+             style={style.page}>
+                <ScrollView >
                     <View style={style.card}><Items /></View>
                     <View style={style.card}><Items /></View>
                     <View style={style.card}><Items /></View>
                     <View style={style.card}><Items /></View>
                     <View style={style.card}><Items /></View>
                     <View style={style.card}><Items /></View>
-
-
-                    <View style={style.back}>
-                        <Ionicons style={style.arrow} name="arrow-back-outline" size={40} color="#fff" />
-                    </View>
-            </ScrollView>
+                </ScrollView>
+                <View style={style.back}>
+                    <Ionicons style={style.arrow} name="arrow-back-outline" size={40} color="#fff" />
+                </View>
+            </View>
         );
     }
 }
@@ -35,6 +41,8 @@ const style = StyleSheet.create({
         // display:'grid',
         flexDirection: 'row',
         // justifyContent: 'space-between',
+        boxsizing: 'borderbox',
+
     },
     card: {
         backgroundColor: "#fff",
@@ -49,11 +57,16 @@ const style = StyleSheet.create({
         width: 55,
         height: 55,
         borderRadius: 30,
-        position: 'fixed',
+        position:'absolute' ,
         bottom: 0,
+        left:16,
         marginBottom: 31,
-    },
+        // position: absolute;
+        // bottom: 8px;
+        // left: 16px;
+        // font- size: 18px;
+},
     arrow: {
-        padding: 6,
-    },   
+    padding: 6,
+},
 })
