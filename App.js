@@ -10,9 +10,9 @@ import Test from './components/test';
 export default function App() {
   return (
     <ScrollView>
-      {/* <Details /> */}
+      <Details />
       {/* <Categery /> */}
-      <Test/>
+      {/* <Test/> */}
     </ScrollView>
   );
 }

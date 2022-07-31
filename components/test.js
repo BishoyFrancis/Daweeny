@@ -6,7 +6,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Items from './Items';
 
 export default function Example() {
-  const [items, setItems] = React.useState([
+  const [myitems, setMyItems] = React.useState([
     { name: 'Panadol ', price: ' 10 EGP', code: '#1abc9c', img: '../assets/whiteBg.jpeg' },
     { name: 'Panadol ', price: ' 10 EGP', code: '#1abc9c', img: '../assets/whiteBg.jpeg' },
     { name: 'Panadol ', price: ' 10 EGP', code: '#1abc9c', img: '../assets/whiteBg.jpeg' },
@@ -35,7 +35,7 @@ export default function Example() {
     <View style={styles.page}>
       <Text style={styles.head}>Common Symptoms</Text>
       <FlatGrid
-        data={items}
+        data={myitems}
         renderItem={({ item }) => (
           <View style={styles.itemContainer}>
             <Items style={styles.card} />

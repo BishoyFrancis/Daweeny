@@ -13,17 +13,23 @@ export default class Details extends Component {
                         style={[style.image]} />
                     <View style={style.data}>
                         <Text style={style.text}> Panadol</Text>
+                    </View>
+                    <View style={style.data}>
+                        <Text style={style.text}> Price</Text>
                         <Text style={style.text}> 10 EGP</Text>
                     </View>
-                    <Text style={style.text}> Exp.Date Nov 2023</Text>
-                    <View style={style.withIcon}>
-                        <Ionicons name="location-sharp" color="#fff" size={32} style={style.text}></Ionicons>
-                        <Text style={style.text}> Nasr City, Cairo</Text>
+                    <View style={style.data}>
+                        <Text style={style.text}> Exp.Date</Text>
+                        <Text style={style.text}> Nov 2023</Text>
                     </View>
-                    <View style={style.withIcon}>
+                    <View style={style.data}>
+                    <Ionicons name="location-sharp" color="#fff" size={32} style={style.text}></Ionicons>
+                    <Text style={style.text}> Nasr City, Cairo</Text>
+                    </View>
+                    {/* <View style={style.data}>
                         <Ionicons name="call" size={32} color="green" style={style.text} />
                         <Text style={style.text}> 01201702790</Text>
-                    </View>
+                    </View> */}
 
                     <TouchableOpacity
                         style={style.button}
@@ -54,7 +60,7 @@ const style = StyleSheet.create({
         width: 306,
         height: 295,
         borderRadius: 10,
-        backgroundColor: "#fff",
+        // backgroundColor: "#1363df",
         alignSelf: 'center',
     },
     data: {
