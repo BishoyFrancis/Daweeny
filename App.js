@@ -1,20 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Main from './screens/Main';
+import {IconButton } from "@react-native-material/core";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Form from './screens/Form';
 
-export default function App() {
+const myIcon = <Icon name="rocket" size={30} color="#900" />;
+
+
+
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Main" component={Main}  options={{
+          title: "",
+          headerLeft:()=>(
+            <Image  source={require('./assets/icon-white.png')}
+              style={{
+              width: 30,
+              height: 30,
+              resizeMode: 'contain'}}Submit
+            />
+          ),
+          headerRight:()=>(
+            <IconButton icon={props => <Icon name="navicon" {...props} size={30} color="white"/>} />
+          ),
+          headerStyle: {
+            backgroundColor: '#1363DF',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
+        <Stack.Screen name="Submit" component={Submit} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
