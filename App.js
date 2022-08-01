@@ -1,21 +1,21 @@
-import { Stack } from '@react-native-material/core';
-import React, { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Main from './screens/Main';
+import {IconButton } from "@react-native-material/core";
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Form from './screens/Form';
 import * as Font from 'expo-font'
-
 
 import Splash from './screens/Splash';
 import Login from './screens/Login';
 import Register from './screens/Register';
 
+const myIcon = <Icon name="rocket" size={30} color="#900" />;
 
-export default function App() {
-  const Stack = createNativeStackNavigator();
 
-  const customFonts={
+const customFonts={
     'QuicksandBold' : require('./assets/fonts/Quicksand-Bold.ttf'),
     'MochiyPopOne-Regular' : require('./assets/fonts/MochiyPopOne-Regular.ttf'),
     'Roboto-Regular' : require('./assets/fonts/Roboto-Regular.ttf'),
@@ -29,18 +29,36 @@ export default function App() {
     _loadFonts();
 
   },[])
+  
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-   
-   <NavigationContainer>
+    <NavigationContainer>
       <Stack.Navigator>
-         <Stack.Screen name="Splash" options={{headerShown:false}} component={Splash}/>
+      <Stack.Screen name="Splash" options={{headerShown:false}} component={Splash}/>
         <Stack.Screen name="Login" options={{headerShown:false}} component={Login}/> 
         <Stack.Screen name="Register" options={{headerShown:false}} component={Register}/>
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+        <Stack.Screen name="Main" component={Main}  options={{
+          title: "",
+          headerLeft:()=>(
+            <Image  source={require('./assets/icon-white.png')}
+              style={{
+              width: 30,
+              height: 30,
+              resizeMode: 'contain'}}Submit
+            />
+          ),
+          headerRight:()=>(
+            <IconButton icon={props => <Icon name="navicon" {...props} size={30} color="white"/>} />
+          ),
+          headerStyle: {
+            backgroundColor: '#1363DF',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
+        <Stack.Screen name="Submit" component={Submit} />
 }
-
-const styles = StyleSheet.create({
- 
-});
