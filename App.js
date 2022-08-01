@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -24,21 +24,24 @@ const customFonts={
     await Font.loadAsync(customFonts);
     console.log("Finished Loading fonts")
   }
+  
+  
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+
   useEffect(()=>{
     console.log("Loading");
     _loadFonts();
 
   },[])
-  
-const Stack = createNativeStackNavigator();
 
-function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen name="Splash" options={{headerShown:false}} component={Splash}/>
-        <Stack.Screen name="Login" options={{headerShown:false}} component={Login}/> 
-        <Stack.Screen name="Register" options={{headerShown:false}} component={Register}/>
+      {/* <Stack.Screen name="Splash" options={{headerShown:false}} component={Splash}/> */}
+        {/* <Stack.Screen name="Login" options={{headerShown:false}} component={Login}/>  */}
+        {/* <Stack.Screen name="Register" options={{headerShown:false}} component={Register}/> */}
         <Stack.Screen name="Main" component={Main}  options={{
           title: "",
           headerLeft:()=>(
@@ -60,5 +63,7 @@ function App() {
             fontWeight: 'bold',
           },
         }}/>
-        <Stack.Screen name="Submit" component={Submit} />
+        </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
