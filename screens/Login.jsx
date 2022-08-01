@@ -6,13 +6,24 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 
 
+
+
 export default function Login(props){
     const [keyboardOffset , setKeyboardOffset] = useState(0);
     const [visibilityIcon , setVisibility] = useState('visibility');
     const [show , setShow] = useState(true);
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('');
-    
+
+
+    function _toggleVisibility(){
+        if(show){
+            setShow(false)
+            setVisibility('visibility-off')
+        }
+        else{setShow(true)
+        setVisibility('visibility')}
+    }
     function _KeyboardDidshowAction(event){
         setKeyboardOffset(event.endCoordinates.height)
     }
@@ -43,7 +54,7 @@ export default function Login(props){
                     <View style={styles.searchSection}>
                         <AwesomeIcon name='user-lock' size={20} style={{paddingRight:15}}/>
                         <TextInput style={styles.input} placeholder='Password' secureTextEntry={show} onChangeText={setPassword} value={password} onKeyPress={()=>{console.log('password is :' , password)}}/>
-                         <MaterialIcons name={visibilityIcon} size={28} style={styles.searchIcon} onPress={()=>{show ? setShow(false) : setShow(true)}}/>
+                         <MaterialIcons name={visibilityIcon} size={28} style={styles.searchIcon} onPress={_toggleVisibility}/>
                     </View>
                 </View>
                 <View style={styles.loginField}> 
@@ -51,7 +62,7 @@ export default function Login(props){
                         <View style={styles.backButton}>
                         <TouchableWithoutFeedback onPress={()=>{console.log('Back is Pressed')}}><Text style={styles.backText}>Back</Text></TouchableWithoutFeedback>
                         </View>
-                    </View>
+                </View>
 
                 
             </View>
@@ -75,7 +86,6 @@ const styles = StyleSheet.create({
     loginField:{
         width:'80%',
         marginBottom:30,
-        
     },
     textInput:{
         width:'100%',
@@ -87,6 +97,7 @@ const styles = StyleSheet.create({
     textTitle:{
         color:'white',
         marginBottom:10,
+        fontWeight:'600',
     },
     button:{
         backgroundColor:'white',

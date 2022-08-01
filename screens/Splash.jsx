@@ -15,8 +15,8 @@ export default function Splash(props){
           }),{iterations:5}).start();
           console.log(props)
           setTimeout(()=>{
-            props.navigation.navigate('Login')
-          },2000)
+            props.navigation.navigate('Register')
+          },4500)
       }, []);
 
     const spin = spinValue.interpolate({

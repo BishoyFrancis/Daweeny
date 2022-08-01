@@ -9,6 +9,7 @@ import * as Font from 'expo-font'
 
 import Splash from './screens/Splash';
 import Login from './screens/Login';
+import Register from './screens/Register';
 
 
 export default function App() {
@@ -32,12 +33,11 @@ export default function App() {
    
    <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Splash" options={{headerShown:false}} component={Splash}/>
-        <Stack.Screen name="Login" options={{headerShown:false}} component={Login}/>
+         <Stack.Screen name="Splash" options={{headerShown:false}} component={Splash}/>
+        <Stack.Screen name="Login" options={{headerShown:false}} component={Login}/> 
+        <Stack.Screen name="Register" options={{headerShown:false}} component={Register}/>
       </Stack.Navigator>
     </NavigationContainer>
-  
-    
   );
 }
 
