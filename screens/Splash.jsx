@@ -13,9 +13,8 @@ export default function Splash(props){
             easing: Easing.cubic,
             useNativeDriver: true,
           }),{iterations:5}).start();
-          console.log(props)
           setTimeout(()=>{
-            props.navigation.navigate('Register')
+            props.navigation.navigate('Login')
           },4500)
       }, []);
 
@@ -55,6 +54,6 @@ const styles = StyleSheet.create({
         marginTop:20,
         color:'white',
         fontSize:50,
-        // fontFamily:'QuicksandBold',
+        // fontFamily:'MochiyPopOne-Regular',
     },
 });

@@ -16,7 +16,25 @@ const Register = () => {
     const [password , setPassword] = useState('');
     const [confirmPassword , setConfirmPassword] = useState('');
     const [view , setView] = useState(false)
+    
 
+    function _checkPasswords(){
+        console.log('password:',password)
+        console.log('confirm password', confirmPassword)
+        if(password === '' && confirmPassword === ''){
+            setView(false);
+            console.log('BOTH EMPTY')
+        }
+        else{
+            if(password === confirmPassword){
+                setView(true)
+                console.log('Equal')
+            }
+            else{
+                setView(false);
+            }
+        }
+    }
 
     function _toggleVisibility(){
         if(show){
@@ -61,9 +79,7 @@ const Register = () => {
                     <Text style={styles.textTitle}>Confirm Password</Text>
                     <View style={styles.searchSection}>
                             <MaterialCommunityIcons name='lock-check' size={23} style={{paddingRight:15}}/>
-                            <TextInput style={styles.input} placeholder='Confirm Password' onChangeText={setConfirmPassword} value={confirmPassword} onKeyPress={()=>{
-
-                            }}/>
+                            <TextInput style={styles.input} placeholder='Confirm Password' onChangeText={setConfirmPassword} value={confirmPassword} onKeyPress={_checkPasswords}/>
                             {view ? <MaterialCommunityIcons name='check-all' size={25}/> : null }
                             
                     </View>

@@ -39,9 +39,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      {/* <Stack.Screen name="Splash" options={{headerShown:false}} component={Splash}/> */}
-        {/* <Stack.Screen name="Login" options={{headerShown:false}} component={Login}/>  */}
-        {/* <Stack.Screen name="Register" options={{headerShown:false}} component={Register}/> */}
+      <Stack.Screen name="Splash" options={{headerShown:false}} component={Splash}/>
+        <Stack.Screen name="Login" options={{headerShown:false}} component={Login}/> 
+        <Stack.Screen name="Register" options={{headerShown:false}} component={Register}/>
         <Stack.Screen name="Main" component={Main}  options={{
           title: "",
           headerLeft:()=>(
