@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image, ScrollView, Button, TouchableOpacity } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Ionicons from '@expo/vector-icons/Ionicons';
+ import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default class Details extends Component {
     render() {

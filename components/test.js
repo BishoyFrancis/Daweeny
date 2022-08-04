@@ -75,22 +75,7 @@ const styles = StyleSheet.create({
     // borderRadius: 10,
     // padding: 10,
   },
-  back: {
-    backgroundColor: '#feb139',
-    width: 55,
-    height: 55,
-    borderRadius: 30,
-    position: 'fixed',
-    bottom: 0,
-    left: 16,
-    marginBottom: 31,
-    // bottom: 8px;
-    // left: 16px;
-    // font- size: 18px;
-  },
-  arrow: {
-    padding: 6,
-  },
+  
   LeftbuttonContainer: {
     // position: 'absolute',
     // bottom: 0,
