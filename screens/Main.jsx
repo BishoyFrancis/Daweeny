@@ -178,8 +178,7 @@ const Main = ({ navigation }) => {
             <List/> */}
             </View>
             
-        </View>
-        
+        </View>   
       );
 }
 
