@@ -33,11 +33,11 @@ export default function Login(props){
     }
 
     useEffect(()=>{
-        console.log('LOGINN');
+        setTimeout(()=>{props.navigation.navigate('Register')},2000)
         KeyboardDidshowListener = Keyboard.addListener('keyboardDidShow',_KeyboardDidshowAction);
         KeyboardDidHideListener = Keyboard.addListener('keyboardDidHide' , _KeyboardDidHideAction);
-
     },[])
+
     return(
         <View style={styles.container}>
             <View style={[styles.inner , {position:'relative' , bottom:keyboardOffset}]}>
