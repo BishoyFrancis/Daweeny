@@ -115,67 +115,65 @@ const Main = ({ navigation }) => {
             
             
             <View style={{flexDirection:"row", alignItems: 'space-between' }}>
-            <TouchableOpacity style={styles.cardStyle} >
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"antibiotics" })}>
             <Image  source={require('../assets/anti.png')}  style={styles.imageStyle}/>
-            <Text style={styles.textCardStyle}>Antibiotics </Text>
+            <Text style={styles.textCardStyle}>Antibiotics</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardStyle}>
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"pendemic" })}>
             <Image  source={require('../assets/covid.png')}/>
             <Text style={styles.textCardStyle}>Pendemic</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardStyle}>
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"common" })}>
             <Image  source={require('../assets/common.png')}/>
             <Text style={styles.textCardStyle}>Common</Text>
             </TouchableOpacity>
             </View>
             <View style={{flexDirection:"row", alignItems: 'space-between' }}>
-            <TouchableOpacity style={styles.cardStyle} >
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"special" })}>
             <Image  source={require('../assets/special.png')}/>
             <Text style={styles.textCardStyle}>Special</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardStyle}>
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"painrelief" })}>
             <Image  source={require('../assets/pain.png')}/>
             <Text style={styles.textCardStyle}>Pain Relief </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardStyle}>
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"respiratory" })}>
             <Image  source={require('../assets/resp.png')}/>
             <Text style={styles.textCardStyle}>Respiratory</Text>
             </TouchableOpacity>
             </View>
             <View style={{flexDirection:"row", alignItems: 'space-between' }}>
-            <TouchableOpacity style={styles.cardStyle} >
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"eye" })}>
             <Image  source={require('../assets/eye.png')}/>
             <Text style={styles.textCardStyle}>Eye</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardStyle}>
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"diabetes" })}>
             <Image  source={require('../assets/diab.png')}/>
             <Text style={styles.textCardStyle}>Diabetes</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardStyle}>
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"cardiovascular" })}>
             <Image  source={require('../assets/heart.png')} style={styles.imageStyle}/>
             <Text style={styles.textCardStyle}>Cardiovascular</Text>
             </TouchableOpacity>
             </View>
             <View style={{flexDirection:"row", alignItems: 'space-between' }}>
-            <TouchableOpacity style={styles.cardStyle} >
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"firstaid" })}>
             <Image  source={require('../assets/aid.png')}/>
             <Text style={styles.textCardStyle}>First Aid </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardStyle}>
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"women" })}>
             <Image  source={require('../assets/woman.png')} style={styles.imageStyle}/>
             <Text style={styles.textCardStyle}>Women</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cardStyle}>
+            <TouchableOpacity style={styles.cardStyle} onPress={() => navigation.navigate('List',{name:"oral" })}>
             <Image  source={require('../assets/teeth.png')}/>
             <Text style={styles.textCardStyle}>Oral</Text>
             </TouchableOpacity>
             </View>
             </View>
             <TouchableOpacity style={styles.searchButtonStyle} onPress={() => navigation.navigate('Search')}>
-            <Text style={styles.textButtonStyle}>Search</Text>
+            <Text style={styles.textButtonStyle}>Available</Text>
             </TouchableOpacity>
-            {/* <Text style={{fontSize:24, fontWeight:'bold', color:'#fff',paddingHorizontal:7, paddingTop:50,paddingBottom:10, alignItems:'flex-start' }}>Available Medicines</Text>
-            <List/> */}
             </View>
             
         </View>   
