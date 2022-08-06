@@ -13,6 +13,7 @@ var {width}= Dimensions.get("window")
 const Search = ()=>{   
 
   const[products, setProducts]=useState([]);
+  
 
   useEffect(()=>{
 

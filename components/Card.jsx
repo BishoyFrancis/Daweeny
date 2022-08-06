@@ -1,12 +1,18 @@
 import React, { useState , useEffect } from "react";
 import {TouchableOpacity , View , StyleSheet, Dimensions, Text, FlatList, Image } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+import moment from 'moment';
+
 
 var {width}= Dimensions.get("window")
 
 const Card = (props)=>{   
+
+    const navigation = useNavigation(); 
+    
     const {_id, name , image, category , country, city,price ,expirationDate }=props;
   return(
-    <TouchableOpacity style={{width:'50%'}}>
+    <TouchableOpacity style={{width:'50%'}} onPress={() => navigation.navigate('Details',{_id:_id})}>
     <View style={styles.container}>
         <Image 
         style={styles.image} 
@@ -25,11 +31,11 @@ const Card = (props)=>{
                 : price + "EGP"
             }</Text>
 
-        <Text style={styles.subTitle}>Exp.Date : {expirationDate}</Text>
+        <Text style={styles.subTitle}>Exp.Date : {(moment(expirationDate).format("ll")).toLocaleString()}</Text>
         <Text style={styles.subTitle}>{city}, {country}</Text>
         
         
-        
+        {/* {(moment(expirationDate).format("ll")).toLocaleString()} */}
     </View>
     </TouchableOpacity>
   )

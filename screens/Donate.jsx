@@ -1,3 +1,5 @@
+
+// , {position:'relative' , bottom:keyboardOffset}
 import { TouchableOpacity,SafeAreaView,StatusBar,Platform ,Image, StyleSheet, Text, View , TextInput , Keyboard , Pressable , TouchableWithoutFeedback, Button, ToastAndroid } from 'react-native'
 import React, { useState, useEffect, useRef, useCallback  } from 'react';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome5'
@@ -14,6 +16,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from "expo-image-picker";
 import axios from 'axios';
 import mime from 'mime';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
+
 
 
 
@@ -63,6 +67,7 @@ const Donate = ({navigation}) => {
             aspect:[4,3],
             quality:1
         });
+        console.log(result)
         if(!result.cancelled){
             setMainImage(result.uri);
             setImage(result.uri);
@@ -94,6 +99,7 @@ const Donate = ({navigation}) => {
     const checkValid = phoneInput.current?.isValidNumber(value);
 
     const addProduct= () =>{
+
         if(
             name == "" ||
             city == "" ||
@@ -106,41 +112,47 @@ const Donate = ({navigation}) => {
             setShowMessage("Please fill in the form correctly")
         }
 
-        let formData = new FormData();
+        const formData = new FormData();
 
         formData.append("image",{
 
             uri: image,
             type: mime.getType(image),
-            name: image.split(" ").pop()
+            name: image.split("/").pop()
         });
         formData.append("name",name);
         formData.append("city",city);
         formData.append("expirationDate",date);
         formData.append("category",category);
         formData.append("price",price);
-        formData.append("currency","EGP");
-        formData.append("country","Egypt");
-        // formData.append("phoneNumber",phoneNumber)
+        formData.append("phoneNumber",phoneNumber)
 
-        // const config ={
-        //     headers: {
-        //         "Content-Type": "multipart/form-data",
-        //         Authorization: `Bearer ${token}`
-        //     }
-        // }
+        const config ={
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }
+
 
         axios
-            .post('https://daweeny-server.herokuapp.com/daweeny/products', formData)
+            .post('https://daweeny-server.herokuapp.com/daweeny/products', formData, config)
             .then((res)=>{
                 if(res.status == 200 || res.status ==201){
-                    alert("done");
+                    Toast.show({
+                        topOffset: 60,
+                        type: "success",
+                        text1:"Thank you", 
+                    })
                     setTimeout(()=>{
                         navigation.navigate('Main');
-                    }, 500)
+                    }, 200)
                 }
             }).catch((err)=>{
-                alert(err)
+                Toast.show({
+                    topOffset: 60,
+                    type: "error",
+                    text1:"error", 
+                })
             })
 
      }
@@ -187,7 +199,7 @@ const Donate = ({navigation}) => {
                 <View style={styles.registerField}>
                 <Text style={styles.textTitle}>Expiration Date</Text>
                     <View style={styles.searchSection}>
-                            <Text style={styles.input} placeholder='Expiration Date'>{(moment(date).format("LL")).toLocaleString()}</Text>
+                            <Text style={styles.input} placeholder='Expiration Date'>{(moment(date).format("ll")).toLocaleString()}</Text>
                             <TouchableOpacity onPress={showDatepicker}><MaterialIcons name='date-range' size={20} style={{paddingRight:15}}/></TouchableOpacity>
                     </View>
                 </View>
@@ -213,13 +225,7 @@ const Donate = ({navigation}) => {
                 
                 />
                 </View>
-                <View style={styles.registerField}>
-                    <Text style={styles.textTitle}>Price</Text>
-                    <View style={styles.searchSection}>
-                            <TextInput style={styles.input} placeholder='EGP' onChangeText={setPrice} value={price}/>
-                    </View>
-                </View>
-                <Text style={styles.textTitle}>{showMessage}</Text>
+                <Text style={styles.textDanger}>{showMessage}</Text>
                 <View style={styles.registerField}> 
                         <TouchableOpacity  style={styles.button}><Text style={styles.buttonText}  onPress={() => addProduct()}>Donate</Text></TouchableOpacity>
                         
@@ -278,12 +284,16 @@ const styles = StyleSheet.create({
         marginBottom:10,
         fontWeight:'600'
     },
+    textDanger:{
+        color:'red',
+        marginBottom:10,
+        fontWeight:'600'
+    },
     searchSection: {
         flexDirection: 'row',
         alignItems:'center',
         backgroundColor:'white',
         height:50,
-        borderRadius:10,
         padding:10,
     },
     input:{
@@ -314,6 +324,3 @@ const styles = StyleSheet.create({
         fontWeight:'400',
     },
 })
-
-
-// , {position:'relative' , bottom:keyboardOffset}
