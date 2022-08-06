@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View , Image , Animated , Easing , ActivityIndicator , Vibration} from 'react-native';
+import { StyleSheet, Text, View , Image , Animated , Easing , ActivityIndicator , Vibration , Alert} from 'react-native';
 import React, { useState, useEffect } from 'react';
 
 
@@ -16,6 +16,12 @@ export default function Splash(props){
           setTimeout(()=>{
             props.navigation.navigate('Login')
           },4500)
+
+          props.navigation.addListener('beforeRemove',()=>{
+            e.preventDefault();
+            console.log('You are Stuck')
+
+          })
       }, []);
 
     const spin = spinValue.interpolate({
