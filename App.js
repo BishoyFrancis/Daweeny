@@ -15,7 +15,10 @@ import "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import * as Font from "expo-font";
 import CustomDrawer from "./components/CustomDrawer";
-
+import Ionicons from 'react-native-vector-icons/Ionicons' 
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import Feather from 'react-native-vector-icons/Feather'
+ 
 import Donate from "./screens/Donate";
 import Sell from "./screens/Sell";
 import Splash from "./screens/Splash";
@@ -52,18 +55,27 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
-        {/* <Stack.Screen name="Splash" options={{headerShown:false}} component={Splash}/> */}
-        {/* <Stack.Screen name="Login" options={{headerShown:false}} component={Login}/>  */}
-        <Stack.Screen
+        <Drawer.Screen name="Splash" options={{headerShown:false , drawerIcon:({color})=>{
+            return(<Feather name='loader' size={25} color={color}/>)
+          } , drawerLabelStyle:{marginLeft:-20 , fontSize:18}, drawerActiveBackgroundColor:'#1363DF' , drawerActiveTintColor:'white'}} component={Splash}/>
+        <Drawer.Screen name="Login" options={{headerShown:false , drawerIcon:({color})=>{
+            return(<MaterialIcons name='login' size={25} color={color}/>)
+          }, drawerLabelStyle:{marginLeft:-20 , fontSize:18}, drawerActiveBackgroundColor:'#1363DF' , drawerActiveTintColor:'white'}} component={Login}/> 
+        <Drawer.Screen
           name="Register"
-          options={{ headerShown: false }}
+          options={{ headerShown: false , drawerIcon:({color})=>{
+            return(<Ionicons name='create-outline' size={25} color={color}/>)
+          } , drawerLabelStyle:{marginLeft:-20 , fontSize:18}, drawerActiveBackgroundColor:'#1363DF' , drawerActiveTintColor:'white'}}
           component={Register}
         />
         {/* <Stack.Screen name='Modal' options={{headerShown:false}} component={ModalTerms}/> */}
-        <Stack.Screen
+        <Drawer.Screen
           name="Profile"
-          options={{ headerShown: false }}
+          options={{ headerShown: false , drawerIcon:({color})=>{
+            return(<Ionicons name='person-outline' size={25} color={color}/>)
+          }, drawerLabelStyle:{marginLeft:-20 , fontSize:18} , drawerActiveBackgroundColor:'#1363DF' , drawerActiveTintColor:'white'}}
           component={Profile}
+          
         />
 
         {/* <Stack.Screen name="Main" component={Main}  options={{
