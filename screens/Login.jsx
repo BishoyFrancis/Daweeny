@@ -1,19 +1,25 @@
-import { StyleSheet, Text, View , Image , Animated , Easing , ActivityIndicator , Vibration , TextInput , Keyboard, TouchableWithoutFeedback, Button, Pressable} from 'react-native';
+import { StyleSheet, Text, View , Image , Animated , Easing , ActivityIndicator , Vibration , TextInput , Keyboard, TouchableOpacity, Button, Pressable} from 'react-native';
 import React, { useState, useEffect } from 'react';
 import EntIcon from 'react-native-vector-icons/Entypo'
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome5'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import axios from 'axios';
 
 
+// import AuthGlobal from "../context/store/AuthGlobal";
+// import {loginUser} from "../context/actions/Auth.actions"
 
 
+const Login=({ navigation })=>{
 
-export default function Login(props){
+    // const context = useContext(AuthGlobal)
     const [keyboardOffset , setKeyboardOffset] = useState(0);
     const [visibilityIcon , setVisibility] = useState('visibility');
     const [show , setShow] = useState(true);
     const [email , setEmail] = useState('');
     const [password , setPassword] = useState('');
+
 
 
     function _toggleVisibility(){
@@ -33,10 +39,62 @@ export default function Login(props){
     }
 
     useEffect(()=>{
-        setTimeout(()=>{props.navigation.navigate('Register')},2000)
+        // if(context.stateUser.isAuthenticated === true){
+        //     navigation.navigate("Main")
+        // }
         KeyboardDidshowListener = Keyboard.addListener('keyboardDidShow',_KeyboardDidshowAction);
         KeyboardDidHideListener = Keyboard.addListener('keyboardDidHide' , _KeyboardDidHideAction);
     },[])
+
+    // context.stateUser.isAuthenticated
+
+    const handleSubmit = ()=>{
+        const user = {
+            email: email,
+            password: password
+        }
+
+        if (email === "" || password === ""){
+            Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1:"Please enter email & password", 
+                text2: "Please try again"
+            }) 
+        }else{
+            axios
+            .post('https://daweeny-server.herokuapp.com/daweeny/users/login', user)
+            .then((res)=>{
+                if(res.status == 200){
+                    Toast.show({
+                        topOffset: 60,
+                        type: "success",
+                        text1:"Login Succeeded"
+                    })
+                    setTimeout(()=>{
+                        setTimeout(()=>{
+                            navigation.navigate("Main");
+                        }
+                            ,200)}
+                        ,0) 
+                }
+            }).catch((err)=>{
+                Toast.show({
+                    topOffset: 60,
+                    type: "error",
+                    text1:"Please enter valid email & password"
+                })
+            })
+            // Toast.show({
+            //     topOffset: 60,
+            //     type: "success",
+            //     text1:"Login Successed"
+            // }); 
+            // loginUser(user, context.dispatch);
+            
+        }
+    }
+
 
     return(
         <View style={styles.container}>
@@ -46,21 +104,23 @@ export default function Login(props){
                     <Text style={styles.textTitle}>Email</Text>
                     <View style={styles.searchSection}>
                         <EntIcon name='email' size={20} style={{paddingRight:15}}/>
-                        <TextInput style={styles.input} placeholder='Email Address or Username' value={email} onChangeText={setEmail} onKeyPress={()=>{console.log("email is :",email)}}/>
+                        <TextInput style={styles.input} placeholder='Email Address or Username' value={email} onChangeText={setEmail}/>
                     </View>
                 </View>
                 <View style={styles.loginField}>
                     <Text style={styles.textTitle}>Password</Text>
                     <View style={styles.searchSection}>
                         <AwesomeIcon name='user-lock' size={20} style={{paddingRight:15}}/>
-                        <TextInput style={styles.input} placeholder='Password' secureTextEntry={show} onChangeText={setPassword} value={password} onKeyPress={()=>{console.log('password is :' , password)}}/>
+                        <TextInput style={styles.input} placeholder='Password' secureTextEntry={show} onChangeText={setPassword} value={password}/>
                          <MaterialIcons name={visibilityIcon} size={28} style={styles.searchIcon} onPress={_toggleVisibility}/>
                     </View>
                 </View>
                 <View style={styles.loginField}> 
-                        <Pressable style={styles.button}><Text style={styles.buttonText} onPress={()=>{console.log("Sign in Pressed")}}>Sign In</Text></Pressable>
+                        <TouchableOpacity style={styles.button}><Text style={styles.buttonText} onPress={()=>{
+                            handleSubmit();
+                            }}>Sign In</Text></TouchableOpacity>
                         <View style={styles.backButton}>
-                        <TouchableWithoutFeedback onPress={()=>{console.log('Back is Pressed')}}><Text style={styles.backText}>Back</Text></TouchableWithoutFeedback>
+                        <TouchableOpacity onPress={()=>{navigation.navigate("Register")}}><Text style={styles.backText}>Don't Have an Account? Register</Text></TouchableOpacity>
                         </View>
                 </View>
 
@@ -71,6 +131,7 @@ export default function Login(props){
     )
 }
 
+export default  Login;
 
 const styles = StyleSheet.create({
     container:{

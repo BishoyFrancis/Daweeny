@@ -1,10 +1,11 @@
-import { Image, StyleSheet, Text, View , TextInput , Keyboard , Pressable , TouchableWithoutFeedback, ActivityIndicator} from 'react-native'
+import { Image, StyleSheet, Text, View , TextInput , Keyboard , Pressable , TouchableOpacity, ActivityIndicator} from 'react-native'
 import React, { useState, useEffect } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons' 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
+import axios from 'axios';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
 
 const Register = (props) => {
 
@@ -32,16 +33,53 @@ const Register = (props) => {
         _checkPassword();
         _checkConfirmPassword();
 
+        let user ={
+            name: fullName,
+            email:email,
+            password:password,
+            isAdmin:true
+        }
+
         valid ? 
+
         
-        setTimeout(()=>{
-            setSignupShow(false);
-            setTimeout(()=>{
-                props.navigation.navigate('Profile')
-                setSignupShow(true)
-            }
-                ,2000)}
-            ,0) : console.log('valid is false')
+
+        axios
+            .post('https://daweeny-server.herokuapp.com/daweeny/users/register', user)
+            .then((res)=>{
+                if(res.status == 200){
+                    Toast.show({
+                        topOffset: 60,
+                        type: "success",
+                        text1:"Registration Succeeded", 
+                        text2: "Please login into your account"
+                    })
+                    setTimeout(()=>{
+                        setSignupShow(false);
+                        setTimeout(()=>{
+                            props.navigation.navigate('Login')
+                            setSignupShow(true)
+                        }
+                            ,200)}
+                        ,0) 
+                }
+            }).catch((err)=>{
+                Toast.show({
+                    topOffset: 60,
+                    type: "error",
+                    text1:"You already have an account", 
+                    text2: "Please login into your account"
+                })
+            })
+
+        
+            : Toast.show({
+                topOffset: 60,
+                type: "error",
+                text1:"something went wrong", 
+                text2: "Please try again"
+            }) 
+        
     }
 
     function _checkFullName(){
@@ -121,16 +159,12 @@ const Register = (props) => {
     
     
     function _checkPasswords(){
-        console.log('password:',password)
-        console.log('confirm password', confirmPassword)
         if(password === '' && confirmPassword === ''){
             setView(false);
-            console.log('BOTH EMPTY');
         }
         else{
             if(password === confirmPassword){
                 setView(true)
-                console.log('Equal')
             }
             else{ 
                 setView(false);
@@ -197,15 +231,14 @@ const Register = (props) => {
                     {confirmPasswordError?<Text style={styles.ErrorMessage}>Password Does Not Match</Text>:null}
                 </View>
                 <View style={styles.registerField}> 
-                        <Pressable style={styles.button}>
+                        <TouchableOpacity style={styles.button}>
                             {signupShow ? <Text style={styles.buttonText} onPress={()=>{
-                            console.log("VALIDATING ...")
                             validateRegister();
                             }}>Sign Up</Text> : <ActivityIndicator size='large' color='#1363DF'/>}
                             
-                        </Pressable>
+                        </TouchableOpacity>
                         <View style={styles.backButton}>
-                        <TouchableWithoutFeedback onPress={()=>{console.log('Back is Pressed')}}><Text style={styles.backText}>Back</Text></TouchableWithoutFeedback>
+                        <TouchableOpacity onPress={()=>{props.navigation.goBack()}}><Text style={styles.backText}>Back</Text></TouchableOpacity>
                         </View>
                 </View>
             </View>
